@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>执行环境</p>
+   
+
+   
+
+</body>
+<script>
+    let p1 = '<p>1.执行环境的类型总共只有两种——全局和局部</p>'
+        p1 += '<p>2.内部环境可以通过作用域链访问所有的外部环境，但外部环境不能访问内部环境中的任何变量和函数。</p>'
+
+    document.write(p1)
+    var color = "blue"; 
+    function changeColor(){ 
+        if (color === "blue"){ 
+        color = "red"; 
+        } else { 
+        color = "blue"; 
+        } 
+    } 
+    changeColor(); 
+    console.log("Color is now " + color); //red
+
+    // -----------------
+
+    let p2 = ' <p>使用 var 声明的变量会自动被添加到最接近的环境中。在函数内部，最接近的环境就是函数的局部环境；在 with 语句中，最接近的环境是函数环境。如果初始化变量时没有使用 var 声明，该变量会自动被添加到全局环境</p>'
+    document.write(p2)
+    
+    function add(num1, num2) { 
+        var sum = num1 + num2; 
+        return sum; 
+        } 
+    var result = add(10, 20); //30 
+    // console.log(sum); //sum is not defined
+
+    function add2(num1, num2) { 
+        sum2 = num1 + num2; 
+        return sum2; 
+    } 
+    var result = add2(10, 20); //30 
+    console.log(sum2); //30
+
+    // -------------查询标识符------
+
+    let p3 = '<p>当在某个环境中为了读取或写入而引用一个标识符时，必须通过搜索来确定该标识符实际代表什'
+        p3 += '么。搜索过程从作用域链的前端开始，向上逐级查询与给定名字匹配的标识符。如果在局部环境中找到'
+        p3 +='了该标识符，搜索过程停止，变量就绪。如果在局部环境中没有找到该变量名，则继续沿作用域链向上'
+        p3 +='搜索。搜索过程将一直追溯到全局环境的变量对象。如果在全局环境中也没有找到这个标识符，则意味'
+        p3 +='着该变量尚未声明。</p>'
+
+        var color = "blue"; 
+        function getColor(){ 
+            return color; 
+        } 
+        console.log(getColor()); //"blue"
+
+        var color2 = "blue"; 
+        function getColor2(){ 
+            var color2 = "red"; 
+            return color2; 
+        } 
+        console.log(getColor2()); //"red"
+
+
+        alert(sum(10,10)); 
+        function sum(num1, num2){ 
+        return num1 + num2; 
+        }
+
+
+
+
+
+
+   
+</script>
+</html>
