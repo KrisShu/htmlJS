@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+let person = {}
+Object.defineProperty(person,'name',{
+    writable:true,
+    configurable:false,
+    value:'Tom'
+})
+
+console.log(person.name) // Tom
+
+//这里修改person对象的name值，是无效的，因为上面writable:false，就说明属性的值不可被修改
+person.name = 'Jerry'
+console.log(person.name) // Tom
+
+//这里删除person对象的name属性，是删除不了的因为上面configurable:false，就说明该属性不能被delete
+delete person.name
+console.log(person.name) // Tom
+
+
+/* 
+// 会报错一个属性被定义为不可配置之后（false），就不能再变回不能再变回可配置的了再次调用 Object.defineProperty()并修改任何非 writable 属性会导致错误
+Object.defineProperty(person,'name',{
+    configurable:true,
+})
+ */
+
+/* 
+ // 定义一个对象，包含伪私有成员 year_和公共成员 edition 
+let book = { 
+ year_: 2017, 
+ edition: 1
+}
+
+Object.defineProperty(book ,"year",{
+    get(){
+        return this.year_
+    },
+    set(newVal){
+          if(newVal > 2017){
+                this.year_ = newVal
+                this.edition += newVal - 2017
+            }
+    }
+})
+
+console.log(book.year) // 2017
+
+book.year = 2018
+console.log(book.year) // 2018
+console.log(book.edition) // 2
+ */
+
+
+let book = {}; 
+Object.defineProperties(book, { 
+    year_: { 
+        value: 2017 ,
+        // writable:true
+    }, 
+    edition: { 
+        value: 1 ,
+        // writable:true
+    }, 
+    year: { 
+        get(){ 
+            return this.year_; 
+        },
+        set(newValue){
+            console.log("1112222222222",newValue)
+            if (newValue > 2017) { 
+                this.year_ = newValue; 
+                console.log("1112222222222" ,this.year_)
+                this.edition += newValue - 2017; 
+            }
+        }
+    }
+})
+// console.log(book.year_) // 2017
+// console.log(book.year) // 2017
+// console.log(book.edition) // 1
+
+book.year = 2018
+
+console.log(book.year_) // 2017
+console.log(book.year) // 2017
+console.log(book.edition) // 1
+
+
+
+
+
+
+
+</script>
+</html>
